@@ -2,23 +2,32 @@ import express from "express";
 import { Chats } from "./data/data.js";
 import dotenv from "dotenv";
 import connectDB from "./config/db.js";
+import userRoutes from "./routes/userRoutes.js";
+import chatRoutes from "./routes/chatRoutes.js";
+import { errorHandler, notFound } from "./middleware/errorMiddleware.js";
 dotenv.config();
-const app = express();
 connectDB();
-
+const app = express();
+app.use(express.json());
 app.get("/", (req, res) => {
   res.send("Welcome to the server");
 });
 
-app.get("/api/chat", (req, res) => {
-  res.send(Chats);
-});
+// app.get("/api/chat", (req, res) => {
+//   res.send(Chats);
+// });
 
-app.get("/api/chat/:chatId", (req, res) => {
-  console.log(req.params.chatId);
-  const chatOfId = Chats.find((c) => c.chatId === req.params.chatId);
-  res.send(chatOfId);
-});
+// app.get("/api/chat/:chatId", (req, res) => {
+//   console.log(req.params.chatId);
+//   const chatOfId = Chats.find((c) => c.chatId === req.params.chatId);
+//   res.send(chatOfId);
+// });
+
+app.use("/api/user", userRoutes);
+app.use("/api/chat", chatRoutes);
+
+app.use(notFound);
+app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
 
