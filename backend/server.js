@@ -13,16 +13,6 @@ app.get("/", (req, res) => {
   res.send("Welcome to the server");
 });
 
-// app.get("/api/chat", (req, res) => {
-//   res.send(Chats);
-// });
-
-// app.get("/api/chat/:chatId", (req, res) => {
-//   console.log(req.params.chatId);
-//   const chatOfId = Chats.find((c) => c.chatId === req.params.chatId);
-//   res.send(chatOfId);
-// });
-
 app.use("/api/user", userRoutes);
 app.use("/api/chat", chatRoutes);
 
