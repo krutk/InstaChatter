@@ -29,10 +29,12 @@ const MyChats = ({ fetchAgain }) => {
   };
 
   useEffect(() => {
-    setLoggedUser(JSON.parse(localStorage.getItem("userInfo")));
+    if(user) {
+    setLoggedUser(JSON.parse(localStorage?.getItem("userInfo")));
     fetchChats();
+    }
     //eslint-disable-next-line
-  }, [fetchAgain]);
+  }, [user, fetchAgain]);
 
   const handleChatItemClick = (chat) => {
     setSelectedChat(chat);

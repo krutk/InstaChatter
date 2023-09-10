@@ -81,4 +81,15 @@
   overflow-y: auto; /* Enable scrolling if the chat history overflows */
 }
 
+.messages {
+  min-height: calc(100vh - 160px);
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+  scrollbar-width: none;
+}
+
+.messages::-webkit-scrollbar {
+  display: none;
+}
 /* Add more styling as needed */

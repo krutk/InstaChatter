@@ -36,9 +36,9 @@ const Login = () => {
       );
 
       console.log("Login Successful:", data);
-      localStorage.setItem("userInfo", JSON.stringify(data));
+      localStorage?.setItem("userInfo", JSON.stringify(data));
       message.success("Login Successful!");
-      history.push("/chats");
+      history?.push("/chats");
     } catch (error) {
       console.error("Login Error:", error);
 

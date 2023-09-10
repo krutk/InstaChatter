@@ -10,8 +10,8 @@ const { TabPane } = Tabs;
 const Home = () => {
   const history = useHistory();
   useEffect(() => {
-    const userInfo = JSON.parse(localStorage.getItem("userInfo"));
-    if (userInfo) history.push("/chats");
+    const userInfo = JSON.parse(localStorage?.getItem("userInfo"));
+    if (userInfo) history?.push("/chats");
   }, [history]);
 
   return (

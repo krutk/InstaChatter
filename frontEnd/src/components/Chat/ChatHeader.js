@@ -45,8 +45,8 @@ const ChatHeader = ({ user, setSelectedChat, chats, setChats }) => {
     if (key === "profile") {
       openProfileModal();
     } else if (key === "logout") {
-      localStorage.removeItem("userInfo");
-      history.push("/");
+      localStorage?.removeItem("userInfo");
+      history?.push("/");
     }
   };
 
@@ -74,14 +74,14 @@ const ChatHeader = ({ user, setSelectedChat, chats, setChats }) => {
         <span className="app-name">InstaChatter</span>
       </div>
       <div className="right">
-        <Badge dot>
+        {/* <Badge dot>
           <BellOutlined style={{ cursor: "pointer" }} />
-        </Badge>
+        </Badge> */}
         <Dropdown overlay={menu} placement="bottomRight">
           <Avatar icon={<UserOutlined />} style={{ cursor: "pointer" }} />
         </Dropdown>{" "}
         <Modal
-          title={null} // Set title to null to customize the content
+          title={null}
           visible={profileModalVisible}
           onCancel={closeProfileModal}
           footer={[

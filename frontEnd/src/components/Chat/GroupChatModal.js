@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useId, useState } from "react";
 import {
   Modal,
   Button,
@@ -14,6 +14,7 @@ import { PlusOutlined } from "@ant-design/icons";
 import { ChatState } from "../../Context/ChatProvider";
 import axios from "axios";
 import BadgeUser from "./BadgeUser";
+const uuid = useId;
 
 const { Option } = Select;
 
@@ -38,7 +39,6 @@ const GroupChatModal = ({ visible, onCancel }) => {
         },
       };
       const { data } = await axios.get(`/api/user?search=${search}`, config);
-      console.log("data: ", data);
       setLoading(false);
       setSearchResult(data);
     } catch (error) {
@@ -56,7 +56,7 @@ const GroupChatModal = ({ visible, onCancel }) => {
 
   const handleDelete = (userToDelete) => {
     setSelectedUsers(
-      selectedUsers.filter((sel) => sel._id !== userToDelete._id)
+      selectedUsers?.filter((sel) => sel._id !== userToDelete._id)
     );
   };
 
@@ -75,7 +75,7 @@ const GroupChatModal = ({ visible, onCancel }) => {
         "/api/chat/group",
         {
           name: groupChatName,
-          users: JSON.stringify(selectedUsers.map((u) => u._id)),
+          users: JSON.stringify(selectedUsers?.map((u) => u._id)),
         },
         config
       );
@@ -112,9 +112,9 @@ const GroupChatModal = ({ visible, onCancel }) => {
         placeholder="Add Users eg: ..- - -.- .- .-. ... .... --..-- ....... -.- .. ... .... .- -."
         onChange={(e) => handleSearch(e.target.value)}
       />
-      {selectedUsers.map((user) => (
+      {selectedUsers?.map((user) => (
         <BadgeUser
-          key={user._id}
+          key={user?._id}
           user={user}
           handleFtn={() => handleDelete(user)}
         />
@@ -123,7 +123,7 @@ const GroupChatModal = ({ visible, onCancel }) => {
         <Spin />
       ) : (
         <List
-          key={user._id}
+          key={user?._id}
           itemLayout="horizontal"
           dataSource={searchResult?.slice(0, 4)}
           loading={loading}

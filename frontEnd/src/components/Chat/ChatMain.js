@@ -7,7 +7,7 @@ import MyChats from "./MyChats";
 import ChatBox from "./ChatBox";
 
 const ChatInterface = () => {
-  const [fetchAgain, setFetchAgain] = useState(false);
+  const [fetchAgain, setFetchAgain] = useState(true);
 
   return (
     <div className="chat-interface">
@@ -30,7 +30,7 @@ const ChatInterface = () => {
             e.target.value = "";
           }}
         /> */}
-        <ChatBox fetchAgain={fetchAgain} />
+        <ChatBox fetchAgain={fetchAgain} setFetchAgain={setFetchAgain} />
       </div>
     </div>
   );

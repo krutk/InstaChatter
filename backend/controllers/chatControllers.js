@@ -70,13 +70,13 @@ const createGroupChat = asyncHandler(async (req, res) => {
     return res.status(400).send({ message: "Please fill all the fields." });
   }
   var users = JSON.parse(req.body.users);
-  if (users.length < 2) {
+  if (users?.length < 2) {
     return res
       .status(400)
       .send("More than 2 users are required to form a group chat.");
   }
 
-  users.push(req.user);
+  users?.push(req.user);
   try {
     const groupChat = await Chat.create({
       chatName: req.body.name,
@@ -85,7 +85,7 @@ const createGroupChat = asyncHandler(async (req, res) => {
       groupAdmin: req.user,
     });
 
-    const fullGroupChat = await Chat.findOne({ _id: groupChat._id })
+    const fullGroupChat = await Chat?.findOne({ _id: groupChat._id })
       .populate("users", "-password")
       .populate("groupAdmin", "-password");
 

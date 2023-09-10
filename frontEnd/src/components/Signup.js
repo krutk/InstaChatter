@@ -26,7 +26,7 @@ const Signup = () => {
       );
 
       setSuccessModalVisible(true);
-      localStorage.setItem("userInfo", JSON.stringify(data));
+      localStorage?.setItem("userInfo", JSON.stringify(data));
     } catch (error) {
     } finally {
       setLoading(false);
@@ -34,7 +34,7 @@ const Signup = () => {
   };
   const handleModalOk = () => {
     setSuccessModalVisible(false);
-    history.push("/chats");
+    history?.push("/chats");
     signupForm.resetFields();
   };
 

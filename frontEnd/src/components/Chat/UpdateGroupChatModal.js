@@ -9,6 +9,7 @@ const UpdateGroupChatModal = ({
   setFetchAgain,
   visible,
   onCancel,
+  fetchMessages,
 }) => {
   const [groupChatName, setGroupChatName] = useState();
   const [search, setSearch] = useState("");
@@ -38,6 +39,7 @@ const UpdateGroupChatModal = ({
       );
       user1._id === user._id ? setSelectedChat() : setSelectedChat(data);
       setFetchAgain(!fetchAgain);
+      fetchMessages();
       setLoading(false);
     } catch (error) {
       message.error("Error Occured", error);
