@@ -58,17 +58,10 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
           },
           config
         );
-
-        // console.log({ data });
-        // const messageObject = {
-        //   text: newMessage,
-        //   sender: user?._id,
-        //   timestamp: new Date().toISOString(),
-        // };
         socket.emit("new-message", data);
         setMessages([...messages, data]);
       } catch (e) {
-        notification.error({
+        message.error({
           message: "Error",
           description: "Error in sending message",
         });
@@ -115,6 +108,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
 
   useEffect(() => {
     socket.on("message received", (newMessageRecieved) => {
+      console.log("message received", newMessageRecieved);
       if (
         !selectedChatCompare || // if chat is not selected or doesn't match current chat
         selectedChatCompare._id !== newMessageRecieved.chat._id
@@ -128,7 +122,6 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
       }
     });
   });
-  console.log(notification, "----------");
   useEffect(() => {
     fetchMessages();
     selectedChatCompare = selectedChat;
